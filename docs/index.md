@@ -19,14 +19,16 @@ O Sistema de Hotaleria é um software que soluciona problemas e auxília a admin
 ### Diagrama de Caso de Uso
 ### Diagrama de Classe
 ### Visão das Classes Participativas
-### Diagrama de Objetos<img src=""></img>
+### Diagrama de Objetos
 ### Diagrama de Sequência
 ### Diagrama de Entidade-relacionamento
 
 ## Termos
-Definições de palavras utilizadas no domínio de hotelaria.<br/>
+Definições adotadas de palavras utilizadas no domínio de hotelaria.<br/>
 
-+ Hospedagem: Acolhimento de pessoas, com ou sem remuneração; abrigo, hospitalidade
+* Hospedagem
+
+  Acolhimento de pessoas, com ou sem remuneração; abrigo, hospitalidade
 
 * Estadia
 
@@ -39,13 +41,8 @@ Definições de palavras utilizadas no domínio de hotelaria.<br/>
 * Hóspede
 
   Quem se abriga.
-
 * Check-in
-
 * Check-out
-
 * Estalagens
-
 * Visitantes
-
   Não hóspedes (?).
