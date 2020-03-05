@@ -4,13 +4,13 @@ O Sistema de Hotaleria é um software que soluciona problemas e auxília a admin
 
 ## Requisitos do Sistema
 | ID do requisito | Titulo do requisito | Descrição do requisito |
-:-:|:-------------------:|---------------------------------------
+:-:|:-------------------:| ---------------------------------------
 1. | Manter dados a respeito dos hóspedes | Registrar informações respeito dos hóspedes para que seja possível manter o histórico e resgatar essas informações quando necessário.
 2. | Manejar as reservas de quarto| Deve ser possível reservar previamente uma hospedagem e as preferências de estada.
 3. | Tratar hospedagens e modalidades de hospedagem | Deve ser possível obter os _direitos_ (como massagens, áreas esportivas, cassinos etc.) aos quais os hospedes tem direito, a depender do _plano de hospedagem_.
 4. | Manter informações a respeito das estalagens  | É preciso manter dados a respeito das estalagens do hotel.
 5. | Controlar consumo dos hóspedes | O sistema deve registrar as informações de consumo das estadias dos hóspedes, para centralizar o pagamento de todas as suas despesas no check-out.
-6. | Permissionamento de usuários | Devido a natureza hierárquica que há na admistração de hotéis, deve haver algum modo de controlar as permissões, de acesso às funções, dos usuários do sistema.
+6. | Permissionamento de usuários | Devido a natureza hierárquica que há na administração de hotéis, deve haver algum modo de controlar as permissões, de acesso às funções, dos usuários do sistema.
 7. | Controlar trafego de visitantes | Deve haver algum meio de controlar a entrada e saída de visitantes no hotel.
 8. | Notificar seguranças | Deve haver algum meio de comunicar a necessidade da presença seguranças.
 9. | Manter dados a respeito do hotel | Deve ser possível obter informações básicas a respeito do hotel a a partir do sistema.
@@ -24,11 +24,9 @@ O Sistema de Hotaleria é um software que soluciona problemas e auxília a admin
 ### Diagrama de Entidade-relacionamento
 
 ## Termos
->Definições de palavras utilizadas no domínio de hotelaria.<br/><br/>  
+Definições de palavras utilizadas no domínio de hotelaria.<br/>
 
-* Hospedagem
-
-  Acolhimento de pessoas, com ou sem remuneração; abrigo, hospitalidade
++ Hospedagem: Acolhimento de pessoas, com ou sem remuneração; abrigo, hospitalidade
 
 * Estadia
 
