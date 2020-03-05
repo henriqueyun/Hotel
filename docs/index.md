@@ -17,6 +17,7 @@ O Sistema de Hotaleria é um software que soluciona problemas e auxília a admin
 
 ## Artefatos
 ### Diagrama de Caso de Uso
+<img src="https://raw.githubusercontent.com/henriqueyun/Hotel/master/docs/diagrams/Sistema%20de%20Hotelaria%20-%20Caso%20de%20Uso.png"></img>
 ### Diagrama de Classe
 ### Visão das Classes Participativas
 ### Diagrama de Objetos
