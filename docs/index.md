@@ -4,7 +4,7 @@ O Sistema de Hotaleria é um software que soluciona problemas e auxília a admin
 
 ## Requisitos do Sistema
 | ID do requisito | Titulo do requisito | Descrição do requisito |
-|:--:|:-------------------:| ---------------------------------------
+|:------:|:-------------------:| ---------------------------------------
 | 1. | Manter dados a respeito dos hóspedes | Registrar informações respeito dos hóspedes para que seja possível manter o histórico e resgatar essas informações quando necessário. |
 | 2. | Manejar as reservas de quarto| Deve ser possível reservar previamente uma hospedagem e as preferências de estada. |
 | 3. | Tratar hospedagens e modalidades de hospedagem | Deve ser possível obter os _direitos_ (como massagens, áreas esportivas, cassinos etc.) aos quais os hospedes tem direito, a depender do _plano de hospedagem_. |
