@@ -1,10 +1,10 @@
-#Documentação do Sistema de Hotelaria
-##Descrição
+# Documentação do Sistema de Hotelaria
+## Descrição
 O Sistema de Hotaleria é um software que soluciona problemas e auxília a administração de hoteis oferecendo desde funcionalidades que permitem acompanhar os hóspedes do check-in ao check-out -- registrando toda sua trilha de consumo -- às opções que possibilitam manejar reservas, gerir os espaços  e controlar o trafégo de visitantes.
 
-##Requisitos do Sistema
-ID do requisito|Titulo do requisito | Descrição do requisito
-:-:|:-------------------------------------:|---------
+## Requisitos do Sistema
+| ID do requisito | Titulo do requisito | Descrição do requisito |
+:-:|:-------------------:|---------------------------------------
 1. | Manter dados a respeito dos hóspedes | Registrar informações respeito dos hóspedes para que seja possível manter o histórico e resgatar essas informações quando necessário.
 2. | Manejar as reservas de quarto| Deve ser possível reservar previamente uma hospedagem e as preferências de estada.
 3. | Tratar hospedagens e modalidades de hospedagem | Deve ser possível obter os _direitos_ (como massagens, áreas esportivas, cassinos etc.) aos quais os hospedes tem direito, a depender do _plano de hospedagem_.
@@ -15,15 +15,15 @@ ID do requisito|Titulo do requisito | Descrição do requisito
 8. | Notificar seguranças | Deve haver algum meio de comunicar a necessidade da presença seguranças.
 9. | Manter dados a respeito do hotel | Deve ser possível obter informações básicas a respeito do hotel a a partir do sistema.
 
-##Artefatos
-###Diagrama de Caso de Uso
-###Diagrama de Classe
-###Visão das Classes Participativas
-###Diagrama de Objetos<img src=""></img>
-###Diagrama de Sequência
-###Diagrama de Entidade-relacionamento
+## Artefatos
+### Diagrama de Caso de Uso
+### Diagrama de Classe
+### Visão das Classes Participativas
+### Diagrama de Objetos<img src=""></img>
+### Diagrama de Sequência
+### Diagrama de Entidade-relacionamento
 
-##Termos
+## Termos
 >Definições de palavras utilizadas no domínio de hotelaria.<br/><br/>  
 
 * Hospedagem
