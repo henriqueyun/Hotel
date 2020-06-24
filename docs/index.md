@@ -82,8 +82,19 @@ Definições adotadas de palavras utilizadas no domínio de hotelaria.<br/>
 * Hóspede
 
   Quem se abriga.
+
 * Check-in
+
+  É o registro de entrada de um hóspede em um hotel.
+
 * Check-out
-* Estalagens
+
+  É o registro de saída de um hóspede de um hotelaria.
+
+* Espaços
+
+  Os lugares que o hotel dispõe.
+
 * Visitantes
-  Não hóspedes (?).
+
+  Pessoas que não são hóspedes ou funcionários mas precisam adentrar ao hotel.
