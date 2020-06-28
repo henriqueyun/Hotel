@@ -1,0 +1,1 @@
+mysql -p < db.sql
