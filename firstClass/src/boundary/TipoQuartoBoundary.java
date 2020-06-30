@@ -38,7 +38,7 @@ public class TipoQuartoBoundary extends Application implements EventHandler<Acti
 	
 	public void generateTable() { 
 		TableColumn<TipoQuarto, String> colId = new TableColumn<>("Codigo");
-		colId.setCellValueFactory(new PropertyValueFactory<TipoQuarto, String>("codigo"));
+		colId.setCellValueFactory(new PropertyValueFactory<TipoQuarto, String>("id"));
 		
 		TableColumn<TipoQuarto, String> colTipo = new TableColumn<>("Tipo");
 		colTipo.setCellValueFactory(new PropertyValueFactory<TipoQuarto, String>("tipo"));

@@ -5,8 +5,7 @@ import javax.validation.constraints.NotBlank;
 public class TipoQuarto {
 	private int id;
 	private String tipo;
-	
-	
+
 	public int getId() {
 		return id;
 	}

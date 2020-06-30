@@ -6,6 +6,7 @@ import entity.TipoQuarto;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -293,7 +294,7 @@ public class QuartoBoundary  extends Application implements EventHandler<ActionE
 			btnPesquisar.setVisible(true);
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		launch();
 	}
