@@ -49,14 +49,14 @@ public class Quarto {
 	}
 	
 	public String toString() { 
-		String ret = "";
-		TipoQuartoControl quartoDao = new TipoQuartoControl();
-		List<TipoQuarto> tpQuarto = quartoDao.retornaTipos();
+		String quartoETipo = "";
+		TipoQuartoControl quartoControl = new TipoQuartoControl();
+		List<TipoQuarto> tpQuarto = quartoControl.retornaTipos();
 		for(TipoQuarto tp: tpQuarto) {
 			if(tp.getId() == this.getId()) {
-				ret = tp.getTipo();
+				quartoETipo = tp.getTipo();
 			}
 		}
-		return ret;
+		return id + " - " + quartoETipo;
 	}
 }

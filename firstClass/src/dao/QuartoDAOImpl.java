@@ -28,7 +28,7 @@ public class QuartoDAOImpl implements QuartoDAO{
 	public void adicionar(Quarto quarto) {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "INSERT INTO quarto (numeroQuarto, TipoQuarto, valorDiaria, qtdCama, disponivel) "
+			String sql = "INSERT INTO Quarto (numeroQuarto, tipoDeQuarto, valorDiaria, qtdCama, disponivel) "
 					+ "VALUES  (0, ?, ?, ?, ?)";
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setInt(1, quarto.getTipo());
@@ -71,7 +71,7 @@ public class QuartoDAOImpl implements QuartoDAO{
 	public void excluir(int id) {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "DELETE FROM quarto WHERE numeroQuarto = ?";
+			String sql = "DELETE FROM Quarto WHERE numeroQuarto = ?";
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setInt(1, id);
 			stm.execute();
@@ -85,7 +85,7 @@ public class QuartoDAOImpl implements QuartoDAO{
 	public void alterar(Quarto quarto) {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "UPDATE quarto SET TipoQuarto = ?, valorDiaria = ?, qtdCama = ?, disponivel = ? WHERE id = ?";
+			String sql = "UPDATE Quarto SET TipoQuarto = ?, valorDiaria = ?, qtdCama = ?, disponivel = ? WHERE id = ?";
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setInt(1, quarto.getTipo());
 			stm.setDouble(2, quarto.getValordia());

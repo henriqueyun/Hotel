@@ -54,13 +54,13 @@ public class QuartoBoundary  extends Application implements EventHandler<ActionE
 	@SuppressWarnings("unchecked")
 	public void generateTable() { 
 		TableColumn<Quarto, Integer> colTipo = new TableColumn<>("Tipo Quarto");
-		colTipo.setCellValueFactory(new PropertyValueFactory<Quarto, Integer>("tipoDeQuarto"));
+		colTipo.setCellValueFactory(new PropertyValueFactory<Quarto, Integer>("tipo"));
 		
 		TableColumn<Quarto, Double> colVlDia = new TableColumn<>("Vl Diaria");
-		colVlDia.setCellValueFactory(new PropertyValueFactory<Quarto, Double>("valorDiaria"));
+		colVlDia.setCellValueFactory(new PropertyValueFactory<Quarto, Double>("valordia"));
 		
 		TableColumn<Quarto, Integer> colQtdCama = new TableColumn<>("Qtd Camas");
-		colQtdCama.setCellValueFactory(new PropertyValueFactory<Quarto, Integer>("qtdCama"));
+		colQtdCama.setCellValueFactory(new PropertyValueFactory<Quarto, Integer>("qtdcama"));
 		
 		TableColumn<Quarto, Boolean> colDisponivel = new TableColumn<>("Disponivel");
 		colDisponivel.setCellValueFactory(new PropertyValueFactory<Quarto, Boolean>("disponivel"));
