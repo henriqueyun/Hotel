@@ -52,18 +52,18 @@ public class HospedeControl {
         }
     }
 
-    public void excluir(Hospede f) {
+    public void excluir(Hospede h) {
         ButtonType btnOk = new ButtonType("ok", ButtonData.OK_DONE);
         ButtonType btnNo = new ButtonType("no", ButtonData.CANCEL_CLOSE);
         Alert alert = new Alert(AlertType.CONFIRMATION,
-                "Você realmente deseja deletar o(a) " + f.getNome() + "?",
+                "Você realmente deseja deletar o(a) " + h.getNome() + "?",
                 btnOk,
                 btnNo);
 
         alert.setTitle("Hotel");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.orElse(btnNo) == btnOk) {
-            hospedeDAO.excluir(f.getCodigo());
+            hospedeDAO.excluir(h.getCodigo());
             atualizaTabela();
         }
     }

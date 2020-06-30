@@ -1,11 +1,6 @@
 package entity;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.time.temporal.TemporalAccessor;
 
 public class Hospede implements Comparable<Hospede> {
 

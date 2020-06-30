@@ -29,7 +29,7 @@ public class HospedeBoundary extends Application implements EventHandler<ActionE
 	private TextField txtCodigo = new TextField();
 	private TextField txtNome = new TextField();
 	private TextField txtCPF = new TextField();
-	private TextField txtDataNascimento = new TextField();
+	private DatePicker txtDataNascimento = new DatePicker();
 	private TextField txtPesquisa = new TextField();
 	
 	private Button btnAdicionar = new Button("Adicionar");
@@ -81,12 +81,12 @@ public class HospedeBoundary extends Application implements EventHandler<ActionE
 
 		panCampos.add(new Label("Código: "), 0, 0);
 		panCampos.add(txtCodigo, 1, 0);
-		panCampos.add(new Label("Usuário: "), 0, 1);
+		panCampos.add(new Label("Nome: "), 0, 1);
 		panCampos.add(txtNome, 1, 1);
-		panCampos.add(new Label("Senha: "), 0, 2);
+		panCampos.add(new Label("Dt. de nasc.: "), 0, 2);
 		panCampos.add(txtDataNascimento, 1, 2);
-		panCampos.add(new Label("Data de Nascimento: "), 0, 2);
-		panCampos.add(txtCPF, 1, 2);
+		panCampos.add(new Label("CPF: "), 0, 3);
+		panCampos.add(txtCPF, 1, 3);
 		panCampos.add(new Label("Pesquisar: "), 2, 0);
 		panCampos.add(txtPesquisa, 3, 0);
 		panCampos.setPadding(new Insets(10));
@@ -141,7 +141,7 @@ public class HospedeBoundary extends Application implements EventHandler<ActionE
 		
 		stage.setResizable(false);
 		stage.setScene(scn);
-		stage.setTitle("Gestão de Funcionários");
+		stage.setTitle("Gestão de Hóspedes");
 		control.atualizaTabela();
 		bloquearCampos();
 		stage.show();
@@ -150,15 +150,15 @@ public class HospedeBoundary extends Application implements EventHandler<ActionE
 	public void handle(ActionEvent e) { 
 		if (e.getTarget() == btnAdicionar) { 
 			if (btnAdicionar.getText().equals("Confirmar") && !btnAlterar.getText().equals("Alterando")) {
-				Hospede f = boundaryToEntity();
-				control.adicionar(f);
+				Hospede h = boundaryToEntity();
+				control.adicionar(h);
 				entityToBoundary(new Hospede());
 				alterarEdicao();
 				zeraCampos();
 				bloquearCampos();
 			}else if (btnAdicionar.getText().equals("Confirmar") && btnAlterar.getText().equals("Alterando")) {
-				Hospede f = boundaryToEntity();
-				if (control.alterar(f)) {
+				Hospede h = boundaryToEntity();
+				if (control.alterar(h)) {
 					alterarEdicao();
 					zeraCampos();
 					bloquearCampos();
@@ -200,25 +200,27 @@ public class HospedeBoundary extends Application implements EventHandler<ActionE
 	}
 	
 	public Hospede boundaryToEntity() {
-		Hospede f = new Hospede();
-		try { 
+		Hospede h = new Hospede();
+		try {
 			if(!(btnAdicionar.getText().equals("Confirmar") && !btnAlterar.getText().equals("Alterando"))) {
-				f.setCodigo(Integer.parseInt(txtCodigo.getText()));
-				f.setNome(txtNome.getText());
-				f.setDataNascimento(LocalDate.parse(txtCPF.getText()));
+				h.setCodigo(Integer.parseInt(txtCodigo.getText()));
+				h.setNome(txtNome.getText());
+				h.setCpf(txtCPF.getText());
+				h.setDataNascimento(txtDataNascimento.getValue());
+				h.setCpf(txtCPF.getText());
 			}
 		} catch (Exception ex) {
-			System.out.println("Erro ao computar os dados");
+			System.err.println("Erro ao computar os dados: " + ex);
 		}
-		return f;
+		return h;
 	}
 	
-	public void entityToBoundary(Hospede f) {
-		if (f != null) {
-			txtCodigo.setText(String.valueOf(f.getCodigo()));
-			txtNome.setText(String.valueOf(f.getNome()) );
-			txtCPF.setText(f.getCpf());
-			txtDataNascimento.setText(dtf.format(f.getDataNascimento()));
+	public void entityToBoundary(Hospede h) {
+		if (h != null) {
+			txtCodigo.setText(String.valueOf(h.getCodigo()));
+			txtNome.setText(String.valueOf(h.getNome()) );
+			txtCPF.setText(h.getCpf());
+			txtDataNascimento.setValue(h.getDataNascimento());
 		}
 	}
 	
@@ -246,7 +248,7 @@ public class HospedeBoundary extends Application implements EventHandler<ActionE
 		txtCodigo.setText("");
 		txtNome.setText("");
 		txtCPF.setText("");
-		txtDataNascimento.setText("");
+		txtDataNascimento.setValue(LocalDate.now());
 	}
 
 	public void alterarEdicao() {

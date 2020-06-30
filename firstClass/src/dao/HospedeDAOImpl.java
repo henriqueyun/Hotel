@@ -3,6 +3,7 @@ package dao;
 import entity.Hospede;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +24,12 @@ public class HospedeDAOImpl implements HospedeDAO {
     public void adicionar(Hospede f) {
         try {
             Connection con = DriverManager.getConnection(URL, USER, PASS);
-            String sql = "INSERT INTO pet (codigo, usuario, senha) "
-                    + "VALUES  (0, ?, ?=)";
+            String sql = "INSERT INTO Hospede (nome, cpf, dataNascimento) "
+                    + "VALUES  (?, ?,?)";
             PreparedStatement stm = con.prepareStatement(sql);
-            stm.setString(1, String.valueOf(f.getCodigo()));
-//            stm.setString(2, f.getUsuario());
-//            stm.setString(3, f.getSenha());
+            stm.setString(1, f.getNome());
+            stm.setString(2, f.getCpf());
+            stm.setString(3, String.valueOf(f.getDataNascimento()));
             stm.executeUpdate();
             con.close();
         } catch (SQLException e) {
@@ -41,15 +42,17 @@ public class HospedeDAOImpl implements HospedeDAO {
         List<Hospede> lista = new ArrayList<>();
         try {
             Connection con = DriverManager.getConnection(URL, USER, PASS);
-            String sql = "SELECT * FROM Usuario WHERE usuario like ?";
+            String sql = "SELECT * FROM Hospede WHERE nome like ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, "%" + nome + "%");
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Hospede f = new Hospede();
-//                f.setUsuario(rs.getString("usuario"));
-//                f.setSenha(rs.getString("senha"));
-                lista.add(f);
+                Hospede h = new Hospede();
+                h.setCodigo(rs.getInt("codigo"));
+                h.setNome(rs.getString("nome"));
+                h.setCpf(rs.getString("cpf"));
+                h.setDataNascimento(rs.getDate("dataNascimento").toLocalDate());
+                lista.add(h);
             }
             con.close();
         } catch (SQLException e) {
@@ -62,7 +65,7 @@ public class HospedeDAOImpl implements HospedeDAO {
     public void excluir(int codigo) {
         try {
             Connection con = DriverManager.getConnection(URL, USER, PASS);
-            String sql = "DELETE FROM pet WHERE id = ?";
+            String sql = "DELETE FROM Hospede WHERE codigo = ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setLong(1, codigo);
             stm.execute();
