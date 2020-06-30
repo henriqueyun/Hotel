@@ -1,8 +1,8 @@
-CREATE DATABASE IF NOT EXISTS hotel; 
+CREATE DATABASE hotel; 
 USE hotel;
 
 CREATE TABLE Hospede (
-	codigo INT NOT NULL AUTO_INCREMENT,
+	codigo INT NOT NULL,
 	nome VARCHAR(45),
        	cpf VARCHAR (20),
 	dataNascimento DATE,
@@ -10,30 +10,28 @@ CREATE TABLE Hospede (
 );
 
 CREATE TABLE Usuario (
-	codigo INT NOT NULL AUTO_INCREMENT,
+	codigo INT NOT NULL,
 	usuario VARCHAR(20),
 	senha VARCHAR(20),
 	PRIMARY KEY (codigo)
 );
 
+
 CREATE TABLE TipoQuarto(
-        codigo int primary key auto_increment,
-        tipo varchar(40) not null
+	codigo int primary key auto_increment,
+	tipo varchar(40) not null 
 );
 
 CREATE TABLE Quarto (
-	numeroQuarto INT NOT NULL AUTO_INCREMENT,
+	numeroQuarto INT NOT NULL,
 	tipoDeQuarto INT,
 	valorDiaria FLOAT,
 	qtdCama TINYINT,
 	disponivel BOOLEAN,
-	PRIMARY KEY (numeroQuarto),
-	CONSTRAINT FK_codigoTipoQuarto FOREIGN KEY (tipoDeQuarto)
-		REFERENCES TipoQuarto(codigo)
+	PRIMARY KEY (numeroQuarto)
 );
-
 CREATE TABLE Reserva (
-	codigo INT NOT NULL AUTO_INCREMENT,
+	codigo INT NOT NULL,
 	dataReserva DATE,
 	dataReservaSaida DATE,
 	status TINYINT,
