@@ -3,6 +3,7 @@ package boundary;
 import java.time.format.DateTimeFormatter;
 
 import control.ReservaControl;
+import entity.Hospede;
 import entity.Quarto;
 import entity.Reserva;
 import javafx.application.Application;
@@ -31,7 +32,7 @@ public class ReservasBoundary extends Application implements EventHandler<Action
 	private ReservaControl control = new ReservaControl();
 	private TextField txtId = new TextField();
 	private ComboBox<Quarto> txtQuartos = new ComboBox<>(control.getQuartos());
-	private ComboBox<String> txtHospedes = new ComboBox<>(control.getHospedes());
+	private ComboBox<Hospede> txtHospedes = new ComboBox<>(control.getHospedes());
 	private DatePicker txtDtReserva = new DatePicker();
 	private DatePicker txtDtSaida = new DatePicker();
 	private TextField txtStatus = new TextField();
@@ -63,10 +64,10 @@ public class ReservasBoundary extends Application implements EventHandler<Action
 		colStatus.setCellValueFactory(new PropertyValueFactory<Reserva, String>("status"));
 		
 		TableColumn<Reserva, Integer> colQuarto = new TableColumn<>("Quarto");
-		colQuarto.setCellValueFactory(new PropertyValueFactory<Reserva, Integer>("numeroQuarto"));
+		colQuarto.setCellValueFactory(new PropertyValueFactory<Reserva, Integer>("quarto"));
 		
-		TableColumn<Reserva, String> colHospede = new TableColumn<>("Hospede");
-		colHospede.setCellValueFactory(new PropertyValueFactory<Reserva, String>("codigoHospede "));
+		TableColumn<Reserva, Integer> colHospede = new TableColumn<>("Hospede");
+		colHospede.setCellValueFactory(new PropertyValueFactory<Reserva, Integer>("hospede"));
 				
 		tableView.getColumns().addAll(colDtReserva, colDtReservaSaida, colStatus, colQuarto, colHospede  );
 		
@@ -155,7 +156,7 @@ public class ReservasBoundary extends Application implements EventHandler<Action
 		
 		stage.setResizable(false);
 		stage.setScene(scn);
-		stage.setTitle("Gest?o de Reservas");
+		stage.setTitle("Gestão de Reservas");
 		control.atualizaTabela();
 		bloquearCampos();
 		stage.show();
@@ -216,14 +217,14 @@ public class ReservasBoundary extends Application implements EventHandler<Action
 	public Reserva boundaryToEntity() { 
 		Reserva reserva = new Reserva();
 		try { 
-			if(!(btnAdicionar.getText().equals("Confirmar") && !btnAlterar.getText().equals("Alterando"))) {
+			if(isThisUpdate()) {
 				reserva.setId( Integer.parseInt(txtId.getText()) );
 			}
 			reserva.setDtReserva(txtDtReserva.getValue());
 			reserva.setDtReservaSaida(txtDtSaida.getValue());
 			reserva.setStatus(txtStatus.getText());
 			reserva.setQuarto(txtQuartos.getSelectionModel().getSelectedItem().getId());
-			
+			reserva.setHospede(txtHospedes.getSelectionModel().getSelectedItem().getCodigo());
 		} catch (Exception ex) { 
 			System.out.println("Erro ao computar os dados");
 		}
@@ -236,13 +237,16 @@ public class ReservasBoundary extends Application implements EventHandler<Action
 			txtDtReserva.setValue(reserva.getDtReserva());
 			txtDtSaida.setValue(reserva.getDtReservaSaida());
 			txtStatus.setText( reserva.getStatus() );
-			
 			for (Quarto quart : control.getQuartos()) {
 				if(reserva.getQuarto() == quart.getId()) {
 					txtQuartos.getSelectionModel().select( quart );
 				}
 			}
-			txtHospedes.getSelectionModel().select( reserva.getHospede() );
+			for (Hospede hosped : control.getHospedes()) {
+				if(reserva.getHospede() == hosped.getCodigo()) {
+					txtHospedes.getSelectionModel().select( hosped );
+				}
+			}
 		}
 	}
 	
@@ -292,7 +296,12 @@ public class ReservasBoundary extends Application implements EventHandler<Action
 			btnPesquisar.setVisible(true);
 		}
 	}
-	
+
+	// verifica a operação é uma inclusão ou edição
+	public boolean isThisUpdate() {
+		return !(btnAdicionar.getText().equals("Confirmar") && !btnAlterar.getText().equals("Alterando"));
+	}
+
 	public static void main(String[] args) {
 		launch();
 	}
