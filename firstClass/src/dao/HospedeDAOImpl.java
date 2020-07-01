@@ -25,7 +25,7 @@ public class HospedeDAOImpl implements HospedeDAO {
         try {
             Connection con = DriverManager.getConnection(URL, USER, PASS);
             String sql = "INSERT INTO Hospede (nome, cpf, dataNascimento) "
-                    + "VALUES  (?, ?,?)";
+                    + "VALUES  (?, ?, ?)";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, f.getNome());
             stm.setString(2, f.getCpf());
@@ -79,11 +79,12 @@ public class HospedeDAOImpl implements HospedeDAO {
     public void alterar(Hospede f) {
         try {
             Connection con = DriverManager.getConnection(URL, USER, PASS);
-            String sql = "UPDATE Usuario SET usuario = ?, senha = ? WHERE id = ?";
+            String sql = "UPDATE Hospede SET nome = ?, cpf = ?, dataNascimento = ? WHERE codigo = ?";
             PreparedStatement stm = con.prepareStatement(sql);
-//            stm.setString(1, f.getUsuario());
-//            stm.setString(2, f.getSenha());
-            stm.setString(3, String.valueOf(f.getCodigo()));
+            stm.setString(1, f.getNome());
+            stm.setString(2, f.getCpf());
+            stm.setDate(3, java.sql.Date.valueOf(f.getDataNascimento()));
+            stm.setInt(4, f.getCodigo());
             stm.executeUpdate();
             con.close();
         } catch (SQLException e) {

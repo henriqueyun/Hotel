@@ -13,6 +13,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -114,6 +115,16 @@ public class HospedeControl {
         lista.clear();
         List<Hospede> hospedes = hospedeDAO.pesquisarPorNome("");
         lista.addAll(hospedes);
+    }
+
+    public List<Hospede> retornaHospede() {
+        List<Hospede> hospedes = hospedeDAO.pesquisarPorNome("");
+        if (hospedes.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            lista.addAll(hospedes);
+        }
+        return lista;
     }
 
     public ObservableList<Hospede> getLista() {
