@@ -34,7 +34,7 @@ public class HomeBoundary extends Application {
 		btnFuncionarios = new Button("", Config.homeIcon("empregado.png"));
 		btnFuncionarios.setStyle("-fx-background-color: #A0522D; -fx-text-fill: #ffffff; ");
 
-		btnHospedes = new Button("", Config.homeIcon("hospedes.png"));
+		btnHospedes = new Button("", Config.homeIcon("Hospedes.png"));
 		btnHospedes.setStyle("-fx-background-color: #4169E1; -fx-text-fill: #ffffff; ");
 
 		btnSobre = new Button("", Config.homeIcon("about.png"));
@@ -83,7 +83,7 @@ public class HomeBoundary extends Application {
 		});
 
 		btnFuncionarios.setOnAction((a) -> {
-			HospedeBoundary hspScreen = new HospedeBoundary();
+			FuncionarioBoundary hspScreen = new FuncionarioBoundary();
 			try {
 				hspScreen.start(primaryStage);
 			} catch (Exception e) {
