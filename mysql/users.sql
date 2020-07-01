@@ -1,1 +1,1 @@
-INSERT INTO Usuario VALUES ("maria",123)
+INSERT INTO Usuario (usuario, senha) VALUES ("maria",123)
