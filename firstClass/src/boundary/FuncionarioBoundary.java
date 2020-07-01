@@ -3,7 +3,6 @@ package boundary;
 import control.FuncionarioControl;
 import entity.Funcionario;
 import javafx.application.Application;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -17,8 +16,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class FuncionarioBoundary extends Application implements EventHandler<ActionEvent> {
@@ -43,14 +40,14 @@ public class FuncionarioBoundary extends Application implements EventHandler<Act
 	
 	public void generateTable() {
 
-		TableColumn<Funcionario, String> colCodigo = new TableColumn<>("Codigo");
-		colCodigo.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("codigo"));
+		TableColumn<Funcionario, Integer> colCodigo = new TableColumn<>("Codigo");
+		colCodigo.setCellValueFactory(new PropertyValueFactory<Funcionario, Integer>("codigo"));
 
 		TableColumn<Funcionario, String> colUsuario = new TableColumn<>("Usuario");
 		colUsuario.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("usuario"));
 		
 		TableColumn<Funcionario, String> colSenha = new TableColumn<>("Senha");
-		colUsuario.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Senha"));
+		colSenha.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("senha"));
 
 		tableView.getColumns().addAll(colCodigo, colUsuario, colSenha);
 		tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Funcionario>() {
@@ -194,13 +191,14 @@ public class FuncionarioBoundary extends Application implements EventHandler<Act
 	public Funcionario boundaryToEntity() {
 		Funcionario f = new Funcionario();
 		try { 
-			if(!(btnAdicionar.getText().equals("Confirmar") && !btnAlterar.getText().equals("Alterando"))) {
+			if(isThisUpdate()) {
+				System.out.print("XD");
 				f.setCodigo(Integer.parseInt(txtCodigo.getText()));
+			}
 				f.setUsuario(txtUsuario.getText());
 				f.setSenha(txtUsuario.getText());
-			}
 		} catch (Exception ex) {
-			System.out.println("Erro ao computar os dados");
+			System.out.println("Erro ao computar os dados" + ex);
 		}
 		return f;
 	}
@@ -243,14 +241,19 @@ public class FuncionarioBoundary extends Application implements EventHandler<Act
 			btnExcluir.setText("Cancelar");
 			btnAlterar.setVisible(false);
 			btnPesquisar.setVisible(false);
-		}else {
+		} else {
 			btnAdicionar.setText("Adicionar");
 			btnExcluir.setText("Excluir");
 			btnAlterar.setVisible(true);
 			btnPesquisar.setVisible(true);
 		}
 	}
-	
+
+	// verifica a operação é uma inclusão ou edição
+	public boolean isThisUpdate() {
+		return !(btnAdicionar.getText().equals("Confirmar") && !btnAlterar.getText().equals("Alterando"));
+	}
+
 	public static void main(String[] args) {
 		Application.launch(FuncionarioBoundary.class, args);
 	}
