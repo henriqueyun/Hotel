@@ -63,7 +63,7 @@ public class ReservaControl {
 			if (erros.isEmpty()) { 
 				reservaDAO.reservar(reserva);
 				alert(AlertType.INFORMATION, "Hotel Mananger", null, 
-						"Reserva de nº " + reserva.getId() + " feita com sucesso");
+						"Reserva de nï¿½ " + reserva.getId() + " feita com sucesso");
 				atualizaTabela();
 			} else { 
 				String msgErros = "Erros: \n";
@@ -73,8 +73,8 @@ public class ReservaControl {
 				alert(AlertType.ERROR, "Hotel Mananger", "ERRO: N?o foi possivel realizar a Reserva", msgErros);
 			}
 		}else {
-			alert(AlertType.ERROR, "Hotel Mananger", "Reserva já existente", "O quarto de Nº"+dispReserva.getQuarto()+
-					" já esta reservado para o hospede de codigo " +dispReserva.getHospede()+ " do dia " +dtf.format(dispReserva.getDtReserva())+" até o dia " +dtf.format(dispReserva.getDtReservaSaida()));
+			alert(AlertType.ERROR, "Hotel Mananger", "Reserva jï¿½ existente", "O quarto de Nï¿½"+dispReserva.getQuarto()+
+					" jï¿½ esta reservado para o hospede de codigo " +dispReserva.getHospede()+ " do dia " +dtf.format(dispReserva.getDtReserva())+" atï¿½ o dia " +dtf.format(dispReserva.getDtReservaSaida()));
 		}
 	}
 	
@@ -82,7 +82,7 @@ public class ReservaControl {
 		ButtonType btnOk = new ButtonType("ok", ButtonData.OK_DONE);
 		ButtonType btnNo = new ButtonType("no", ButtonData.CANCEL_CLOSE);
 		Alert alert = new Alert(AlertType.CONFIRMATION,
-		        "Você realmente deseja excluir a reserva nº " +  reserva.getId() + "?",
+		        "Vocï¿½ realmente deseja excluir a reserva nï¿½ " +  reserva.getId() + "?",
 		        btnOk,
 		        btnNo);
 
@@ -116,7 +116,7 @@ public class ReservaControl {
 				for (ConstraintViolation<Reserva> erro : erros ) { 
 					msgErros += erro.getPropertyPath() + " - " + erro.getMessage() + "\n";
 				}
-				alert(AlertType.ERROR, "Hotel Mananger", "ERRO: Não foi possivel alterar os dados da reserva", msgErros);
+				alert(AlertType.ERROR, "Hotel Mananger", "ERRO: Nï¿½o foi possivel alterar os dados da reserva", msgErros);
 			}
 		}
 		return alterou;
@@ -126,7 +126,7 @@ public class ReservaControl {
 		lista.clear();
 		List<Reserva> reservas = reservaDAO.pesquisarPorHospede(hospede);
 		if( quartos.isEmpty()) {
-			alert(AlertType.ERROR, "Error na busca", null, "Não foi encontrado nenhuma reserva desse hospede.");
+			alert(AlertType.ERROR, "Error na busca", null, "Nï¿½o foi encontrado nenhuma reserva desse hospede.");
 			return null;
 		}else {
 			lista.addAll(reservas);
@@ -143,7 +143,18 @@ public class ReservaControl {
 		List<Reserva> reservas = reservaDAO.pesquisarPorHospede("");
 		lista.addAll(reservas);
 	}
-	
+
+	public List<Reserva> retornaReservas() {
+		List<Reserva> reservas = reservaDAO.retornaReservas();
+		if( reservas.isEmpty()) {
+			alert(AlertType.ERROR, "Erro na busca: ", null, "Nï¿½o foi encontrado nenhnuma estadia com esse nome.");
+			return null;
+		} else {
+			lista.addAll(reservas);
+		}
+		return reservas;
+	}
+
 	public ObservableList<Reserva> getLista() {
 		return lista;
 	}

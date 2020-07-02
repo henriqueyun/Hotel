@@ -14,9 +14,8 @@ import entity.Reserva;
 public class ReservaDAOImpl implements ReservaDAO {
 	
 	private static final String URL = "jdbc:mariadb://localhost/hotel?allowMultiQueries=true";
-	private static final String USER = "root";
-	private static final String PASS = "";
-	
+	private static final String USER = System.getProperty("user.name");
+	private static final String PASS = "123";
 
 	public ReservaDAOImpl() {
 		try {

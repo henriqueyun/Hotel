@@ -70,7 +70,7 @@ public class LoginBoundary extends Application {
 
 		try {
 			FileInputStream input;
-			input = new FileInputStream("resources/images/hotel.png");
+			input = new FileInputStream("firstClass/resources/images/hotel.png");
 			Image image = new Image(input, 280, 280, false, false);
 			ImageView imageView = new ImageView(image);
 
@@ -95,7 +95,7 @@ public class LoginBoundary extends Application {
 			}else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Hotel Mananger");
-				alert.setContentText("Usuario não encontrado! Tente novamente");
+				alert.setContentText("Usuario nï¿½o encontrado! Tente novamente");
 				alert.showAndWait();
 				txtLogin.setText("");
 				txtSenha.setText("");

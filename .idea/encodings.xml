@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/firstClass/src/boundary/FuncionarioBoundary.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/firstClass/src/boundary/HospedeBoundary.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/firstClass/src/boundary/LoginBoundary.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/firstClass/src/boundary/PetBoundary.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/firstClass/src/boundary/QuartoBoundary.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/firstClass/src/boundary/ReservasBoundary.java" charset="ISO-8859-1" />
