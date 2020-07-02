@@ -10,8 +10,6 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-
-import dao.ReservaDAO;
 import dao.ReservaDAOImpl;
 import entity.Hospede;
 import entity.Quarto;
