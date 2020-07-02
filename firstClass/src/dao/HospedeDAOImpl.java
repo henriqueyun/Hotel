@@ -25,7 +25,7 @@ public class HospedeDAOImpl implements HospedeDAO {
         try {
             Connection con = DriverManager.getConnection(URL, USER, PASS);
             String sql = "INSERT INTO Hospede (nome, cpf, dataNascimento) "
-                    + "VALUES  (?, ?,?)";
+                    + "VALUES  (?, ?, ?)";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, f.getNome());
             stm.setString(2, f.getCpf());

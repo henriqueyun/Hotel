@@ -14,8 +14,9 @@ import entity.Reserva;
 public class ReservaDAOImpl implements ReservaDAO {
 	
 	private static final String URL = "jdbc:mariadb://localhost/hotel?allowMultiQueries=true";
-	private static final String USER = System.getProperty("user.name");
-	private static final String PASS = "123";
+	private static final String USER = "root";
+	private static final String PASS = "";
+	
 
 	public ReservaDAOImpl() {
 		try {
@@ -29,15 +30,16 @@ public class ReservaDAOImpl implements ReservaDAO {
 	public void reservar(Reserva reserva) {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "INSERT INTO reserva (codigo, dataReserva, dataReservaSaida, status, codigoUsuario, codigoHospede, numeroQuarto) "
-					+ "VALUES  (0, ?, ?, ?, ?, ?, ?)";
+			//todo tirar usuario chumbado
+			String sql = "INSERT INTO Reserva (codigo, dataReserva, dataReservaSaida, status, codigoUsuario, codigoHospede, numeroQuarto) "
+					+ "VALUES  (0, ?, ?, ?, 1, ?, ?)";
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setDate(1,  java.sql.Date.valueOf(reserva.getDtReserva()));
 			stm.setDate(2, java.sql.Date.valueOf(reserva.getDtReservaSaida()));
 			stm.setString(3, reserva.getStatus());
-			stm.setInt(4, reserva.getUsuario());
-			stm.setInt(5, reserva.getHospede());
-			stm.setInt(6, reserva.getQuarto());
+			//stm.setInt(4, reserva.getUsuario());
+			stm.setInt(4, reserva.getHospede());
+			stm.setInt(5, reserva.getQuarto());
 			stm.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
@@ -77,7 +79,7 @@ public class ReservaDAOImpl implements ReservaDAO {
 	public void excluir(int id) {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "DELETE FROM reserva WHERE codigo = ?";
+			String sql = "DELETE FROM Reserva WHERE codigo = ?";
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setInt(1, id);
 			stm.execute();
@@ -91,20 +93,50 @@ public class ReservaDAOImpl implements ReservaDAO {
 	public void alterar(Reserva reserva) {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "UPDATE reserva SET dataReserva = ?, dataReservaSaida = ?, status = ?, codigoUsuario = ?, codigoHospede = ?, numeroQuarto = ? WHERE codigo = ?";
+			 //todo arrumar usuario chumbado
+			String sql = "UPDATE Reserva SET dataReserva = ?, dataReservaSaida = ?, status = ?, codigoUsuario = 1, codigoHospede = ?, numeroQuarto = ? WHERE codigo = ?";
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setDate(1,  java.sql.Date.valueOf(reserva.getDtReserva()));
 			stm.setDate(2,  java.sql.Date.valueOf(reserva.getDtReservaSaida()));
 			stm.setString(3, reserva.getStatus());
-			stm.setInt(4, reserva.getUsuario());
-			stm.setInt(5, reserva.getQuarto());
-			stm.setInt(6, reserva.getHospede());
-			stm.setInt(7, reserva.getId());
+			//stm.setInt(4, reserva.getUsuario());
+			stm.setInt(4, reserva.getQuarto());
+			stm.setInt(5, reserva.getHospede());
+			stm.setInt(6, reserva.getId());
 			stm.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Reserva verificaDisponibilidade(Reserva reserva) {
+		Reserva Retreserva = new Reserva();
+		try {
+			Connection con = DriverManager.getConnection(URL, USER, PASS);
+			String sql = "SELECT * FROM Reserva WHERE numeroQuarto = ? AND (dataReserva BETWEEN ? AND ? OR dataReservaSaida BETWEEN ? AND ?)";
+			PreparedStatement stm = con.prepareStatement(sql);
+			stm.setInt(1,  reserva.getQuarto());
+			stm.setDate(2,  java.sql.Date.valueOf(reserva.getDtReserva()));
+			stm.setDate(3,  java.sql.Date.valueOf(reserva.getDtReservaSaida()));
+			stm.setDate(4,  java.sql.Date.valueOf(reserva.getDtReserva()));
+			stm.setDate(5,  java.sql.Date.valueOf(reserva.getDtReservaSaida()));
+			ResultSet rs = stm.executeQuery();
+			if (rs.first()) {
+				Retreserva.setId(rs.getInt("codigo"));
+				Retreserva.setDtReserva(rs.getDate("dataReserva").toLocalDate());
+				Retreserva.setDtReservaSaida(rs.getDate("dataReservaSaida").toLocalDate()); 
+				Retreserva.setStatus(rs.getString("status"));
+				Retreserva.setUsuario(rs.getInt("codigoUsuario"));
+				Retreserva.setQuarto(rs.getInt("numeroQuarto"));
+				Retreserva.setHospede(rs.getInt("codigoHospede"));
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Retreserva;
 	}
 
 }

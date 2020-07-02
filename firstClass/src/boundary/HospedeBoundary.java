@@ -49,8 +49,8 @@ public class HospedeBoundary extends Application implements EventHandler<ActionE
 		TableColumn<Hospede, String> colNome = new TableColumn<>("Nome");
 		colNome.setCellValueFactory(new PropertyValueFactory<Hospede, String>("nome"));
 
-		TableColumn<Hospede, String> colCPF = new TableColumn<>("Nome");
-		colNome.setCellValueFactory(new PropertyValueFactory<Hospede, String>("nome"));
+		TableColumn<Hospede, String> colCPF = new TableColumn<>("CPF");
+		colCPF.setCellValueFactory(new PropertyValueFactory<Hospede, String>("cpf"));
 
 		TableColumn<Hospede, String> colDataNascimento = new TableColumn<>("Nascimento");
 		colDataNascimento.setCellValueFactory(item ->
@@ -204,11 +204,10 @@ public class HospedeBoundary extends Application implements EventHandler<ActionE
 		try {
 			if(!(btnAdicionar.getText().equals("Confirmar") && !btnAlterar.getText().equals("Alterando"))) {
 				h.setCodigo(Integer.parseInt(txtCodigo.getText()));
-				h.setNome(txtNome.getText());
-				h.setCpf(txtCPF.getText());
-				h.setDataNascimento(txtDataNascimento.getValue());
-				h.setCpf(txtCPF.getText());
 			}
+			h.setNome(txtNome.getText());
+			h.setCpf(txtCPF.getText());
+			h.setDataNascimento(txtDataNascimento.getValue());
 		} catch (Exception ex) {
 			System.err.println("Erro ao computar os dados: " + ex);
 		}
@@ -228,6 +227,7 @@ public class HospedeBoundary extends Application implements EventHandler<ActionE
 		txtCodigo.setDisable(true);
 		txtNome.setDisable(true);
 		txtCPF.setDisable(true);
+		txtDataNascimento.setDisable(true);
 		tableView.setDisable(false);
 		txtPesquisa.setDisable(false);
 		btnVoltar.setDisable(false);

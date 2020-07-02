@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="/home/henriqueyun/workspace/HotelManager/lib/classmate-1.3.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/henriqueyun/workspace/HotelManager/lib/hibernate-validator-6.1.5.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/henriqueyun/workspace/HotelManager/lib/hibernate-validator-annotation-processor-6.1.5.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/henriqueyun/workspace/HotelManager/lib/hibernate-validator-cdi-6.1.5.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/henriqueyun/workspace/HotelManager/lib/jakarta.el-3.0.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/henriqueyun/workspace/HotelManager/lib/jakarta.validation-api-2.0.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/henriqueyun/workspace/HotelManager/lib/jboss-logging-3.3.2.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/henriqueyun/workspace/HotelManager/lib/mariadb-java-client-2.6.1.jar"/>
+	<classpathentry kind="output" path="out/production/Hotel"/>
+</classpath>

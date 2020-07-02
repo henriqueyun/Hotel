@@ -27,7 +27,7 @@ public class Funcionario implements Comparable<Funcionario> {
 		return usuario;
 	}
 	public String getSenha() {
-		return usuario;
+		return senha;
 	}
 
 	@Override

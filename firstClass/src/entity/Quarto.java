@@ -53,10 +53,10 @@ public class Quarto {
 		TipoQuartoControl quartoControl = new TipoQuartoControl();
 		List<TipoQuarto> tpQuarto = quartoControl.retornaTipos();
 		for(TipoQuarto tp: tpQuarto) {
-			if(tp.getId() == this.getId()) {
+			if(tp.getId() == this.getTipo()) {
 				quartoETipo = tp.getTipo();
 			}
 		}
-		return id + " - " + quartoETipo;
+		return quartoETipo + " - " + id;
 	}
 }

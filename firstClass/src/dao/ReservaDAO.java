@@ -9,4 +9,5 @@ public interface ReservaDAO {
 	List<Reserva> pesquisarPorHospede(String hospede);
 	void excluir(int id);
 	void alterar(Reserva reserva);
+	Reserva verificaDisponibilidade(Reserva reserva);
 }

@@ -9,4 +9,5 @@ public interface FuncionarioDAO {
 	List<Funcionario> pesquisarPorNome(String nome);
 	void excluir(int id);
 	void alterar(Funcionario f);
+	Funcionario realizaLogin(String usuario, String senha);
 }

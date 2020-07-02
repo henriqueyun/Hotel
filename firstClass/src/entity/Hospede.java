@@ -51,4 +51,9 @@ public class Hospede implements Comparable<Hospede> {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+    @Override
+    public String toString() {
+        return codigo + " - " + nome;
+    }
 }

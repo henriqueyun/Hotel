@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS hotel;
 CREATE DATABASE IF NOT EXISTS hotel; 
 USE hotel;
 
@@ -36,7 +37,7 @@ CREATE TABLE Reserva (
 	codigo INT NOT NULL AUTO_INCREMENT,
 	dataReserva DATE,
 	dataReservaSaida DATE,
-	status TINYINT,
+	status VARCHAR(20),
        	codigoUsuario INT,
 	codigoHospede INT,
 	numeroQuarto INT,
