@@ -51,4 +51,14 @@ CREATE TABLE Reserva (
 
 );
 
+CREATE Table Estadia (
+	codigo INT NOT NULL AUTO_INCREMENT,
+	dataCheckin DATE,
+	dataCheckout DATE,
+	status VARCHAR(20),
+	codigoReserva INT,
+	PRIMARY KEY (codigo),
+	CONSTRAINT FK_codigoReserva FOREIGN KEY (codigoReserva)
+		REFERENCES Reserva(codigo)
+	)
 
