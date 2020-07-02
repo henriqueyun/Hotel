@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 
 public class FuncionarioDAOImpl implements FuncionarioDAO {
 	private static final String URL = "jdbc:mariadb://localhost/hotel?allowMultiQueries=true";
-	private static final String USER = "henriqueyun";
-	private static final String PASS = "123";
-
+	private static final String USER = "root";
+	private static final String PASS = "";
+	
 	public FuncionarioDAOImpl() {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
@@ -24,12 +24,11 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 	public void adicionar(Funcionario f) {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "INSERT INTO pet (codigo, usuario, senha) "
-					+ "VALUES  (0, ?, ?=)";
+			String sql = "INSERT INTO Usuario (codigo, usuario, senha) "
+					+ "VALUES  (0, ?, ?)";
 			PreparedStatement stm = con.prepareStatement(sql);
-			stm.setString(1, String.valueOf(f.getCodigo()));
-			stm.setString(2, f.getUsuario());
-			stm.setString(3, f.getSenha());
+			stm.setString(1, f.getUsuario());
+			stm.setString(2, f.getSenha());
 			stm.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
@@ -48,6 +47,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) { 
 				Funcionario f = new Funcionario();
+				f.setCodigo(rs.getInt("codigo"));
 				f.setUsuario(rs.getString("usuario"));
 				f.setSenha(rs.getString("senha"));
 				lista.add(f);
@@ -63,7 +63,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 	public void excluir(int codigo) {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "DELETE FROM pet WHERE id = ?";
+			String sql = "DELETE FROM Usuario WHERE codigo = ?";
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setLong(1, codigo);
 			stm.execute();
@@ -89,7 +89,26 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 		}
 		
 	}
-	
-	
-	
+
+	@Override
+	public Funcionario realizaLogin(String usuario, String senha) {
+		Funcionario f = new Funcionario();
+		try {
+			Connection con = DriverManager.getConnection(URL, USER, PASS);
+			String sql = "SELECT * FROM Usuario WHERE usuario = ? AND senha = ?";
+			PreparedStatement stm = con.prepareStatement(sql);
+			stm.setString(1, usuario);
+			stm.setString(2, senha);
+			ResultSet rs = stm.executeQuery();
+			if (rs.next()) { 
+				f.setCodigo(rs.getInt("codigo"));
+				f.setUsuario(rs.getString("usuario"));
+				f.setSenha(rs.getString("senha"));
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return f;
+	}
 }
