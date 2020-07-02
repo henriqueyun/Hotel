@@ -2,7 +2,6 @@ package entity;
 
 import java.time.LocalDate;
 
-
 public class Reserva {
 	private int id;
 	private LocalDate dtReserva;
@@ -55,5 +54,7 @@ public class Reserva {
 	public void setUsuario(int usuario) {
 		this.usuario = usuario;
 	}
-	
+	public String toString(){
+		return id + "(" + hospede + ")";
+	};
 }

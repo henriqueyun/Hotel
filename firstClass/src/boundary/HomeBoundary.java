@@ -1,5 +1,6 @@
 package boundary;
 
+import entity.Estadia;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -64,37 +65,46 @@ public class HomeBoundary extends Application {
 		VBox panPrincipal = new VBox(8);
 		Scene scn = new Scene(panPrincipal, 900, 600);
 
-		btnQuartos.setOnAction((a) -> {
-			QuartoBoundary tpScreen = new QuartoBoundary();
+		btnCheck.setOnAction((a) -> {
+			EstadiaBoundary screen = new EstadiaBoundary();
 			try {
-				tpScreen.start(primaryStage);
+				screen.start(primaryStage);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+
+		btnQuartos.setOnAction((a) -> {
+			QuartoBoundary screen = new QuartoBoundary();
+			try {
+				screen.start(primaryStage);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
 		
 		btnReservas.setOnAction((a) -> {
-			ReservasBoundary rsvScreen = new ReservasBoundary();
+			ReservasBoundary screen = new ReservasBoundary();
 			try {
-				rsvScreen.start(primaryStage);
+				screen.start(primaryStage);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
 
 		btnFuncionarios.setOnAction((a) -> {
-			FuncionarioBoundary hspScreen = new FuncionarioBoundary();
+			FuncionarioBoundary screen = new FuncionarioBoundary();
 			try {
-				hspScreen.start(primaryStage);
+				screen.start(primaryStage);
 			} catch (Exception e) {
 				e.printStackTrace();
 			};
 		});
 
 		btnHospedes.setOnAction((a) -> {
-			HospedeBoundary hspScreen = new HospedeBoundary();
+			HospedeBoundary screen = new HospedeBoundary();
 			try {
-				hspScreen.start(primaryStage);
+				screen.start(primaryStage);
 			} catch (Exception e) {
 				e.printStackTrace();
 			};

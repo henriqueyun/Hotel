@@ -109,4 +109,29 @@ public class ReservaDAOImpl implements ReservaDAO {
 		}
 	}
 
+	public  List<Reserva> retornaReservas() {
+			List<Reserva> lista = new ArrayList<>();
+			try {
+				Connection con = DriverManager.getConnection(URL, USER, PASS);
+				String sql = "SELECT * FROM Reserva where status = 'reservado'";
+				PreparedStatement stm = con.prepareStatement(sql);
+				ResultSet rs = stm.executeQuery();
+				while (rs.next()) {
+					Reserva reserva = new Reserva();
+					reserva.setId(rs.getInt("codigo"));
+					reserva.setDtReserva(rs.getDate("dataReserva").toLocalDate());
+					reserva.setDtReservaSaida(rs.getDate("dataReservaSaida").toLocalDate());
+					reserva.setStatus(rs.getString("status"));
+					reserva.setUsuario(rs.getInt("codigoUsuario"));
+					reserva.setQuarto(rs.getInt("numeroQuarto"));
+					reserva.setHospede(rs.getInt("codigoHospede"));
+					lista.add(reserva);
+				}
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return lista;
+	}
+
 }

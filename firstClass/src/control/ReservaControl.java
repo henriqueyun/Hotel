@@ -12,6 +12,7 @@ import javax.validation.ValidatorFactory;
 
 import dao.ReservaDAO;
 import dao.ReservaDAOImpl;
+import entity.Estadia;
 import entity.Hospede;
 import entity.Quarto;
 import entity.Reserva;
@@ -24,7 +25,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 
 public class ReservaControl {
 	
-	private ReservaDAO reservaDAO = new ReservaDAOImpl();
+	private ReservaDAOImpl reservaDAO = new ReservaDAOImpl();
 	private ObservableList<Reserva> lista = FXCollections.observableArrayList();
 	private ObservableList<Quarto> quartos;
 	private ObservableList<Hospede> hospedes = FXCollections.observableArrayList();
@@ -111,7 +112,7 @@ public class ReservaControl {
 		return alterou;
 	}
 
-	public Reserva pesquisarPorHospede(String hospede) { 
+	public Reserva pesquisarPorHospede(String hospede) {
 		lista.clear();
 		List<Reserva> reservas = reservaDAO.pesquisarPorHospede(hospede);
 		if( quartos.isEmpty()) {
@@ -129,7 +130,18 @@ public class ReservaControl {
 		List<Reserva> reservas = reservaDAO.pesquisarPorHospede("");
 		lista.addAll(reservas);
 	}
-	
+
+	public List<Reserva> retornaReservas() {
+		List<Reserva> reservas = reservaDAO.retornaReservas();
+		if( reservas.isEmpty()) {
+			alert(AlertType.ERROR, "Erro na busca: ", null, "Não foi encontrado nenhnuma estadia com esse nome.");
+			return null;
+		} else {
+			lista.addAll(reservas);
+		}
+		return reservas;
+	}
+
 	public ObservableList<Reserva> getLista() {
 		return lista;
 	}
