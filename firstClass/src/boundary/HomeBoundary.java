@@ -77,6 +77,15 @@ public class HomeBoundary extends Application {
 		VBox panPrincipal = new VBox(8);
 		Scene scn = new Scene(panPrincipal, 900, 600);
 
+		btnCheck.setOnAction((a) -> {
+			EstadiaBoundary screen = new EstadiaBoundary();
+			try {
+				screen.start(primaryStage);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+
 		btnQuartos.setOnAction((a) -> {
 			QuartoBoundary tpScreen = new QuartoBoundary();
 			try {

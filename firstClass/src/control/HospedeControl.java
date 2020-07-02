@@ -49,7 +49,7 @@ public class HospedeControl {
             for (ConstraintViolation<Hospede> erro : erros ) {
                 msgErros += erro.getPropertyPath() + " - " + erro.getMessage() + "\n";
             }
-            alert(AlertType.ERROR, "Hotel", "ERRO: Não foi possivel cadastrar o funcionario", msgErros);
+            alert(AlertType.ERROR, "Hotel", "ERRO: Não foi possivel cadastrar o hóspede", msgErros);
         }
     }
 
@@ -102,7 +102,7 @@ public class HospedeControl {
         lista.clear();
         List<Hospede> hospedes = hospedeDAO.pesquisarPorNome(nome);
         if(hospedes.isEmpty()) {
-            alert(AlertType.ERROR, "Error na busca", null, "Não foi encontrado nenhum Pet com esse nome.");
+            alert(AlertType.ERROR, "Error na busca", null, "Não foi encontrado nenhum hospede com esse nome.");
             return null;
         }else {
             lista.addAll(hospedes);

@@ -52,9 +52,13 @@ public class EstadiaBoundary extends Application implements EventHandler<ActionE
 		);
 
 		TableColumn<Estadia, String> colCheckout = new TableColumn<>("Checkout");
-		colCheckout.setCellValueFactory(item ->
-				new ReadOnlyStringWrapper(dtf.format(item.getValue().getDataCheckout()))
-		);
+		colCheckout.setCellValueFactory(item -> {
+					try {
+						return new ReadOnlyStringWrapper(dtf.format(item.getValue().getDataCheckout()));
+					} catch (NullPointerException e) {
+						System.err.println("Data nula.");
+					} return null;
+		});
 
 		TableColumn<Estadia, String> colStatus = new TableColumn<>("Status");
 		colStatus.setCellValueFactory(new PropertyValueFactory<Estadia, String>("status"));
@@ -89,7 +93,7 @@ public class EstadiaBoundary extends Application implements EventHandler<ActionE
 		});
 		panCampos.add(new Label("Reserva: "), 0, 0);
 		panCampos.add(txtReserva, 1, 0);
-		panCampos.add(new Label("Código: "), 0, 1);
+		panCampos.add(new Label("Cï¿½digo: "), 0, 1);
 		panCampos.add(txtCodigo, 1, 1);
 		panCampos.add(new Label("Dt. Check-in: "), 0, 2);
 		panCampos.add(txtCheckin, 1, 2);
@@ -141,7 +145,7 @@ public class EstadiaBoundary extends Application implements EventHandler<ActionE
 		
 		stage.setResizable(false);
 		stage.setScene(scn);
-		stage.setTitle("Gestão de Estadias");
+		stage.setTitle("Gestï¿½o de Estadias");
 		control.pesquisar();
 		bloquearCampos();
 		stage.show();
@@ -154,9 +158,10 @@ public class EstadiaBoundary extends Application implements EventHandler<ActionE
 			entityToBoundary(new Estadia());
 			zeraCampos();
 			bloquearCampos();
+			txtReserva.getSelectionModel().clearSelection();
 		} else if (event.getTarget() == btnCheckout) {
 			Estadia e = boundaryToEntity();
-			control.checkin(e);
+			control.checkout(e);
 			zeraCampos();
 			bloquearCampos();
 		}
@@ -164,16 +169,17 @@ public class EstadiaBoundary extends Application implements EventHandler<ActionE
 	public Estadia boundaryToEntity() {
 		Estadia e = new Estadia();
 		try {
-				System.out.print("XD");
+			if (txtReserva.getSelectionModel().getSelectedItem() != null) {
 				e.setReserva(txtReserva.getSelectionModel().getSelectedItem().getId());
-				if (!txtCodigo.getText().equals("")) {
-					e.setCodigo(Integer.parseInt(txtCodigo.getText()));
-				}
-				e.setDataCheckin(txtCheckin.getValue());
-				e.setDataCheckout(txtCheckout.getValue());
-				e.setStatus(txtStatus.getText());
+			}
+			if (!txtCodigo.getText().equals("")) {
+				e.setCodigo(Integer.parseInt(txtCodigo.getText()));
+			}
+			e.setDataCheckin(txtCheckin.getValue());
+			e.setDataCheckout(txtCheckout.getValue());
+			e.setStatus(txtStatus.getText());
 		} catch (Exception ex) {
-			System.out.println("Erro ao computar os dados" + ex);
+			ex.printStackTrace();
 		}
 		return e;
 	}
@@ -182,7 +188,11 @@ public class EstadiaBoundary extends Application implements EventHandler<ActionE
 		if (e != null) {
 			txtCodigo.setText(String.valueOf(e.getCodigo()));
 			txtCheckin.setValue(e.getDataCheckin());
-			txtCheckout.setValue(e.getDataCheckout());
+			try {
+				txtCheckout.setValue(e.getDataCheckout());
+			} catch (NullPointerException ex) {
+				ex.getMessage();
+			}
 			txtStatus.setText( e.getStatus() );
 		}
 	}
@@ -213,7 +223,7 @@ public class EstadiaBoundary extends Application implements EventHandler<ActionE
 	
 	public void suporValores() {
 		txtCheckin.setValue(LocalDate.now());
-		txtCheckout.setValue(LocalDate.now());
+		txtCheckout.setValue(null);
 		txtStatus.setText("Checar");
 	}
 

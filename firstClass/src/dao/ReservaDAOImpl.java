@@ -31,14 +31,14 @@ public class ReservaDAOImpl implements ReservaDAO {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
 			//todo tirar usuario chumbado
 			String sql = "INSERT INTO Reserva (codigo, dataReserva, dataReservaSaida, status, codigoUsuario, codigoHospede, numeroQuarto) "
-					+ "VALUES  (0, ?, ?, ?, 1, ?, ?)";
+					+ "VALUES  (0, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setDate(1,  java.sql.Date.valueOf(reserva.getDtReserva()));
 			stm.setDate(2, java.sql.Date.valueOf(reserva.getDtReservaSaida()));
 			stm.setString(3, reserva.getStatus());
-			//stm.setInt(4, reserva.getUsuario());
-			stm.setInt(4, reserva.getHospede());
-			stm.setInt(5, reserva.getQuarto());
+			stm.setInt(4, reserva.getUsuario());
+			stm.setInt(5, reserva.getHospede());
+			stm.setInt(6, reserva.getQuarto());
 			stm.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
@@ -52,7 +52,7 @@ public class ReservaDAOImpl implements ReservaDAO {
 		List<Reserva> lista = new ArrayList<>();
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "SELECT * FROM Reserva as r INNER JOIN Hospede as h ON r.codigoHospede = h.codigo And h.nome like ?";
+			String sql = "SELECT * FROM Reserva as r INNER JOIN Hospede as h ON r.codigoHospede = h.codigo And h.nome like ? And r.status != 'checado'";
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setString(1, "%" + hospede + "%");
 			ResultSet rs = stm.executeQuery();

@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 
 public class FuncionarioDAOImpl implements FuncionarioDAO {
 	private static final String URL = "jdbc:mariadb://localhost/hotel?allowMultiQueries=true";
-	private static final String USER = "root";
-	private static final String PASS = "";
+	private static final String USER = System.getProperty("user.name");
+	private static final String PASS = "123";
 	
 	public FuncionarioDAOImpl() {
 		try {
@@ -77,7 +77,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
 	public void alterar(Funcionario f) {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "UPDATE Usuario SET usuario = ?, senha = ? WHERE id = ?";
+			String sql = "UPDATE Usuario SET usuario = ?, senha = ? WHERE codigo = ?";
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setString(1, f.getUsuario());
 			stm.setString(2, f.getSenha());

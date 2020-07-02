@@ -24,11 +24,11 @@ public class EstadiaDAOImpl implements EstadiaDAO {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
 			String sql = "INSERT INTO Estadia (codigo, dataCheckin, dataCheckout, status, codigoReserva) "
-					+ "VALUES  (0, ?, ?, ?, ?); UPDATE Reserva SET status = 'checado' WHERE codigo = ?  ";
+					+ "VALUES  (0, ?, ?, ?, ?); UPDATE Reserva SET status = 'Checado' WHERE codigo = ?  ";
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setDate(1, java.sql.Date.valueOf(f.getDataCheckin()));
-			stm.setDate(2, java.sql.Date.valueOf(f.getDataCheckout()));
-			stm.setString(3, f.getStatus());
+			stm.setNull(2, Types.DATE);
+			stm.setString(3, "Checado");
 			stm.setInt(4, f.getReserva());
 			stm.setInt(5, f.getReserva());
 			stm.executeUpdate();
@@ -43,14 +43,14 @@ public class EstadiaDAOImpl implements EstadiaDAO {
 		List<Estadia> lista = new ArrayList<>();
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "SELECT * FROM Estadia e INNER JOIN Reserva r ON e.codigoReserva = r.codigo WHERE r.status = 'Checado'";
+			String sql = "SELECT * FROM Estadia e INNER JOIN Reserva r ON e.codigoReserva = r.codigo WHERE e.status = 'Checado'";
 			PreparedStatement stm = con.prepareStatement(sql);
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) { 
 				Estadia f = new Estadia();
 				f.setCodigo(rs.getInt("codigo"));
 				f.setDataCheckin(rs.getDate("dataCheckin").toLocalDate());
-				f.setDataCheckout(rs.getDate("dataCheckout").toLocalDate());
+				//f.setDataCheckout(rs.getDate("dataCheckout").toLocalDate());
 				f.setStatus(rs.getString("status"));
 				f.setReserva(rs.getInt("codigoReserva"));
 				lista.add(f);
@@ -63,30 +63,16 @@ public class EstadiaDAOImpl implements EstadiaDAO {
 	}
 
 	@Override
-	public void excluir(int codigo) {
+	public void checkout(Estadia e) {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "DELETE FROM Usuario WHERE codigo = ?";
+			String sql = "UPDATE Estadia SET status = 'Finalizada' WHERE codigo = ?";
 			PreparedStatement stm = con.prepareStatement(sql);
-			stm.setLong(1, codigo);
-			stm.execute();
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void alterar(Estadia f) {
-		try {
-			Connection con = DriverManager.getConnection(URL, USER, PASS);
-			String sql = "UPDATE Usuario SET usuario = ?, senha = ? WHERE id = ?";
-			PreparedStatement stm = con.prepareStatement(sql);
-			stm.setString(3, String.valueOf(f.getCodigo()));
+			stm.setString(1, String.valueOf(e.getCodigo()));
 			stm.executeUpdate();
 			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 		}
 		
 	}

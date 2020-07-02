@@ -1,6 +1,7 @@
 package control;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -145,8 +146,8 @@ public class ReservaControl {
 	public List<Reserva> retornaReservas() {
 		List<Reserva> reservas = reservaDAO.retornaReservas();
 		if( reservas.isEmpty()) {
-			alert(AlertType.ERROR, "Erro na busca: ", null, "N�o foi encontrado nenhnuma estadia com esse nome.");
-			return null;
+			alert(AlertType.WARNING, "Erro na busca: ", null, "N�o foi encontrado nenhuma reserva para checkin");
+			return Collections.emptyList();
 		} else {
 			lista.addAll(reservas);
 		}

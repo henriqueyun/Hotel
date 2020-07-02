@@ -182,6 +182,7 @@ public class HospedeBoundary extends Application implements EventHandler<ActionE
 			if (btnExcluir.getText().equals("Excluir")) {
 				Hospede f = boundaryToEntity();
 				control.excluir(f);
+				zeraCampos();
 			}else {
 				btnAlterar.setText("Alterar");
 				alterarEdicao();
@@ -248,7 +249,7 @@ public class HospedeBoundary extends Application implements EventHandler<ActionE
 		txtCodigo.setText("");
 		txtNome.setText("");
 		txtCPF.setText("");
-		txtDataNascimento.setValue(LocalDate.now());
+		txtDataNascimento.setValue(null);
 	}
 
 	public void alterarEdicao() {

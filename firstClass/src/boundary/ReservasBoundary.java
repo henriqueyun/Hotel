@@ -225,6 +225,7 @@ public class ReservasBoundary extends Application implements EventHandler<Action
 			reserva.setStatus(txtStatus.getText());
 			reserva.setQuarto(txtQuartos.getSelectionModel().getSelectedItem().getId());
 			reserva.setHospede(txtHospedes.getSelectionModel().getSelectedItem().getCodigo());
+			reserva.setUsuario(HomeBoundary.funcionario.getCodigo());
 		} catch (Exception ex) { 
 			System.out.println("Erro ao computar os dados");
 		}

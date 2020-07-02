@@ -15,6 +15,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -56,32 +57,17 @@ public class EstadiaControl {
 			for (ConstraintViolation<Estadia> erro : erros ) {
 				msgErros += erro.getPropertyPath() + " - " + erro.getMessage() + "\n";
 			}
-			alert(AlertType.ERROR, "Hotel", "ERRO: Não foi possivel realizar o check-in ", msgErros);
+			alert(AlertType.ERROR, "Hotel", "ERRO: Nï¿½o foi possivel realizar o check-in ", msgErros);
 		}
 	}
 	
-	public void excluir(Estadia e) {
-		ButtonType btnOk = new ButtonType("ok", ButtonData.OK_DONE);
-		ButtonType btnNo = new ButtonType("no", ButtonData.CANCEL_CLOSE);
-		Alert alert = new Alert(AlertType.CONFIRMATION,
-		        "Você realmente deseja deletar a estadia " + (e.getCodigo()) + "?",
-		        btnOk,
-		        btnNo);
 
-		alert.setTitle("Hotel");
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.orElse(btnNo) == btnOk) {
-			estadiaDAO.excluir(e.getCodigo());
-	    	pesquisar();
-		}
-	}
-	
-	public boolean alterar(Estadia e) {
+	public boolean checkout(Estadia e) {
 		boolean alterou = false;
 		ButtonType btnOk = new ButtonType("ok", ButtonData.OK_DONE);
 		ButtonType btnNo = new ButtonType("no", ButtonData.CANCEL_CLOSE);
 		Alert alert = new Alert(AlertType.CONFIRMATION,
-		        "Deseja realmente alterar esses dados?",
+		        "Deseja realmente realizar o checkout da estadia " + e.getCodigo() + "?",
 		        btnOk,
 		        btnNo);
 
@@ -89,8 +75,9 @@ public class EstadiaControl {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.orElse(btnNo) == btnOk) {
 			Set<ConstraintViolation<Estadia>> erros = validator.validate(e);
-			if (erros.isEmpty()) { 
-				estadiaDAO.alterar(e);
+			if (erros.isEmpty()) {
+				e.setDataCheckout(LocalDate.now());
+				estadiaDAO.checkout(e);
 		    	pesquisar();
 		    	alterou = true;;
 			} else {
@@ -98,7 +85,7 @@ public class EstadiaControl {
 				for (ConstraintViolation<Estadia> erro : erros ) {
 					msgErros += erro.getPropertyPath() + " - " + erro.getMessage() + "\n";
 				}
-				alert(AlertType.ERROR, "Estadia", "ERRO: Não foi possível alterar o estadia", msgErros);
+				alert(AlertType.ERROR, "Estadia", "ERRO: Nï¿½o foi possï¿½vel alterar o estadia", msgErros);
 			}
 		}
 		
@@ -109,7 +96,7 @@ public class EstadiaControl {
 		lista.clear();
 		List<Estadia> estadias = estadiaDAO.pesquisar();
 		if(estadias.isEmpty()) {
-			alert(AlertType.ERROR, "Erro na busca: ", null, "Não foi encontrada nenhuma estadia.");
+			alert(AlertType.ERROR, "Erro na busca: ", null, "Nï¿½o foi encontrada nenhuma estadia.");
 		}else {
 			lista.addAll(estadias);
 		}
@@ -122,4 +109,5 @@ public class EstadiaControl {
     public ObservableList<Reserva> getReservas() {
 		return reservas;
     }
+
 }
