@@ -95,7 +95,7 @@ public class LoginBoundary extends Application {
 			}else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Hotel Mananger");
-				alert.setContentText("Usuario n�o encontrado! Tente novamente");
+				alert.setContentText("Usuario n?o encontrado! Tente novamente");
 				alert.showAndWait();
 				txtLogin.setText("");
 				txtSenha.setText("");

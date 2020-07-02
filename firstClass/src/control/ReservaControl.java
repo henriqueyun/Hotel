@@ -25,7 +25,7 @@ import javafx.scene.control.ButtonBar.ButtonData;
 
 public class ReservaControl {
 	
-	private ReservaDAO reservaDAO = new ReservaDAOImpl();
+	private ReservaDAOImpl reservaDAO = new ReservaDAOImpl();
 	private ObservableList<Reserva> lista = FXCollections.observableArrayList();
 	private ObservableList<Quarto> quartos;
 	private ObservableList<Hospede> hospedes = FXCollections.observableArrayList();
@@ -74,7 +74,7 @@ public class ReservaControl {
 			}
 		}else {
 			alert(AlertType.ERROR, "Hotel Mananger", "Reserva j� existente", "O quarto de N�"+dispReserva.getQuarto()+
-					" j� esta reservado para o hospede de codigo " +dispReserva.getHospede()+ " do dia " +dtf.format(dispReserva.getDtReserva())+" at� o dia " +dtf.format(dispReserva.getDtReservaSaida()));
+					" j� esta reservado para o hospede de codigo " +dispReserva.getHospede()+ " do dia " + dtf.format(dispReserva.getDtReserva())+" at� o dia " +dtf.format(dispReserva.getDtReservaSaida()));
 		}
 	}
 	
@@ -122,7 +122,7 @@ public class ReservaControl {
 		return alterou;
 	}
 
-	public Reserva pesquisarPorHospede(String hospede) { 
+	public Reserva pesquisarPorHospede(String hospede) {
 		lista.clear();
 		List<Reserva> reservas = reservaDAO.pesquisarPorHospede(hospede);
 		if( quartos.isEmpty()) {
